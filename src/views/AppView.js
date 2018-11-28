@@ -1,0 +1,55 @@
+import React from "react";
+import { transaction } from "mobx";
+import { Provider } from "mobx-react";
+import { BrowserRouter, Route } from "react-router-dom";
+import Sidebar from "./sidebar/Sidebar";
+import CollectionView from "./collection/CollectionView";
+
+function withStoreRouter(WrappedComponent, store, key) {
+  return props => {
+    const { userId, collectionId } = props.match.params; // eslint-disable-line
+    console.log("collectionId: ", collectionId);
+    transaction(() => {
+      // store.userId = userId || store.auth.userId;
+      const { schema } = store.selectedCollection;
+      if (!schema || schema.id !== collectionId) {
+        store.selectedCollection.config = store.config.collections.find(
+          col => col.id === collectionId
+        );
+      }
+      /* if (activityIdOrDate) {
+				if (activityIdOrDate.split('-').length === 3) {
+					store.selectedDate = new Date(activityIdOrDate);
+					store.selectedActivity.id = undefined;
+				} else {
+					store.selectedActivity.id = activityIdOrDate;
+					store.selectedDate = undefined;
+				}
+			}*/
+    });
+    return <WrappedComponent key={key} {...props} />;
+  };
+}
+
+export default ({ store }) => (
+  <Provider store={store}>
+    <BrowserRouter>
+      <div
+        style={{
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          flexDirection: "row"
+        }}
+      >
+        <Sidebar />
+        <div style={{ flex: 1 }}>
+          <Route
+            path="/col/:collectionId"
+            component={withStoreRouter(CollectionView, store)}
+          />
+        </div>
+      </div>
+    </BrowserRouter>
+  </Provider>
+);
