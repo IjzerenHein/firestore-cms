@@ -4,6 +4,7 @@ import { Provider } from "mobx-react";
 import { BrowserRouter, Route } from "react-router-dom";
 import Sidebar from "./sidebar/Sidebar";
 import CollectionView from "./collection/CollectionView";
+import DocumentMeta from "react-document-meta";
 
 function withStoreRouter(WrappedComponent, store, key) {
   return props => {
@@ -26,7 +27,15 @@ function withStoreRouter(WrappedComponent, store, key) {
 				}
 			}*/
     });
-    return <WrappedComponent key={key} {...props} />;
+    return (
+      <DocumentMeta
+        title={
+          store.config.title + " - " + store.selectedCollection.config.name
+        }
+      >
+        <WrappedComponent key={key} {...props} />
+      </DocumentMeta>
+    );
   };
 }
 
