@@ -1,21 +1,13 @@
 import DocumentConfig from "./DocumentConfig";
-import CollectionColumnConfig from "./CollectionColumnConfig";
 
 class CollectionConfig {
-  constructor(id, { path, name, icon, document, columns }) {
+  constructor(id, { path, name, icon, document, columns }, context) {
     this._id = id;
     this._path = path;
     this._name = name;
     this._icon = icon;
-    this._document = new DocumentConfig(document);
-    console.log(columns);
-    this._columns = Object.keys(columns).map(
-      columnId =>
-        new CollectionColumnConfig(columnId, {
-          config: columns[columnId],
-          document: this._document
-        })
-    );
+    this._document = new DocumentConfig(document, context);
+    this._columns = columns.map(columnId => this._document.fields[columnId]);
   }
 
   get id() {

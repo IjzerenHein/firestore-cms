@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import CollectionTable from "./CollectionTable";
+import CollectionQueryRulesView from "./CollectionQueryRulesView";
 import { StorePropType, storeObserver } from "../../app";
+import { Pane } from "evergreen-ui";
 
 class CollectionView extends Component {
   static propTypes = {
@@ -9,7 +11,12 @@ class CollectionView extends Component {
 
   render() {
     const { store } = this.props;
-    return <CollectionTable collection={store.selectedCollection} />;
+    return (
+      <Pane padding={20} display="flex" flexDirection="column" flex={1}>
+        <CollectionQueryRulesView collection={store.selectedCollection} />
+        <CollectionTable collection={store.selectedCollection} />
+      </Pane>
+    );
   }
 }
 

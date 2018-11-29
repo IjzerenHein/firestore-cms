@@ -8,7 +8,6 @@ import CollectionView from "./collection/CollectionView";
 function withStoreRouter(WrappedComponent, store, key) {
   return props => {
     const { userId, collectionId } = props.match.params; // eslint-disable-line
-    console.log("collectionId: ", collectionId);
     transaction(() => {
       // store.userId = userId || store.auth.userId;
       const { schema } = store.selectedCollection;
@@ -43,7 +42,7 @@ export default ({ store }) => (
         }}
       >
         <Sidebar />
-        <div style={{ flex: 1 }}>
+        <div style={{ flex: 1, display: "flex" }}>
           <Route
             path="/col/:collectionId"
             component={withStoreRouter(CollectionView, store)}

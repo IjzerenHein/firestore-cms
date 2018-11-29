@@ -7,7 +7,7 @@ const todo = {
       description: "Todo text"
     },
     isFinished: {
-      type: "bool",
+      type: "boolean",
       name: "Finished",
       description: "Check to mark the todo as finished"
     }
@@ -20,17 +20,7 @@ const todos = {
   name: "Todos",
   icon: "tick",
   document: todo,
-  columns: {
-    id: {
-      width: 1
-    },
-    text: {
-      width: 5
-    },
-    isFinished: {
-      width: 7
-    }
-  }
+  columns: ["id", "text", "isFinished"]
 };
 
 const collections = {

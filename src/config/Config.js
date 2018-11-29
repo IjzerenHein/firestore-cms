@@ -1,13 +1,21 @@
 import CollectionConfig from "./CollectionConfig";
+import defaultConfig from "./defaultConfig";
+import merge from "lodash.merge";
 
 class Config {
-  constructor({ firebase, isPersistent, collections }) {
+  constructor(config) {
+    const { firebase, title, isPersistent, types, collections } = merge(
+      {},
+      defaultConfig,
+      config
+    );
     this._firebase = firebase;
     this._isPersistent = isPersistent;
-
+    this._title = title;
+    this._types = types;
     this._collections = Object.keys(collections).map(
       collectionId =>
-        new CollectionConfig(collectionId, collections[collectionId])
+        new CollectionConfig(collectionId, collections[collectionId], this)
     );
   }
 
@@ -17,6 +25,14 @@ class Config {
 
   get isPersistent() {
     return this._isPersistent;
+  }
+
+  get title() {
+    return this._title;
+  }
+
+  get types() {
+    return this._types;
   }
 
   /**

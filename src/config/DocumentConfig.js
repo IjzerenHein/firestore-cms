@@ -1,7 +1,7 @@
 import DocumentFieldConfig from "./DocumentFieldConfig";
 
 class DocumentConfig {
-  constructor({ fields }) {
+  constructor({ fields }, context) {
     fields = {
       ...fields,
       id: {
@@ -13,24 +13,24 @@ class DocumentConfig {
       path: {
         type: "string",
         name: "Path",
-        description: "Collection path",
-        ...(fields.id || {})
+        description: "Document path",
+        ...(fields.path || {})
       }
     };
-    this._fields = Object.keys(fields).map(
-      fieldId => new DocumentFieldConfig(fieldId, fields[fieldId])
+    this._fields = {};
+    Object.keys(fields).forEach(
+      fieldId =>
+        (this._fields[fieldId] = new DocumentFieldConfig(
+          fieldId,
+          fields[fieldId],
+          context
+        ))
     );
   }
 
   get fields() {
     return this._fields;
   }
-
-  getField(fieldId) {
-    return this._fields.find(({ id }) => id === fieldId);
-  }
-
-  // get validate() {}
 }
 
 export default DocumentConfig;
