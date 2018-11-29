@@ -5,6 +5,7 @@ class CollectionQuery {
   constructor(config) {
     this._config = config;
     this._rules = observable.array([]);
+    this._limit = observable.box(20);
     this.addRuleForField("id");
   }
 
@@ -40,7 +41,10 @@ class CollectionQuery {
   }
 
   eval(ref) {
-    // TODO
+    const { limit } = this;
+    if (limit) {
+      ref = ref.limit(limit);
+    }
     return ref;
   }
 }

@@ -12,7 +12,7 @@ const defaultConfig = {
   // Browser and application title
   title: "Firebase CMS",
 
-  // By default database data is persisted in the browser-cache.
+  // By default firestore data is persisted in the browser-cache.
   // If you don't want this, set this value to `false`
   isPersistent: true,
 

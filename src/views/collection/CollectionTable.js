@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, Table, Popover, Position, IconButton, Menu } from "evergreen-ui";
-import { observer, DocumentFieldValue } from "../../app";
+import { Card, Pane, Spinner, Table } from "evergreen-ui";
+import { observer } from "../../app";
+import CollectionTableRow from "./CollectionTableRow";
 
 class CollectionTable extends Component {
   static propTypes = {
@@ -22,50 +23,30 @@ class CollectionTable extends Component {
             ))}
             <Table.HeaderCell width={48} flex="none" />
           </Table.Head>
-          <Table.Body flex={1}>
+          <Table.Body flex={1} position="relative">
             {content.docs.map(doc => (
-              <Table.Row
+              <CollectionTableRow
                 key={doc.id}
-                isSelectable
-                // onSelect={() => alert(doc.name)}
-              >
-                {config.columns.map(column => (
-                  <Table.TextCell key={column.id}>
-                    <DocumentFieldValue document={doc} field={column} />
-                  </Table.TextCell>
-                ))}
-                <Table.Cell width={48} flex="none">
-                  <Popover
-                    content={() => this.renderRowMenu(doc)}
-                    position={Position.BOTTOM_RIGHT}
-                  >
-                    <IconButton icon="more" height={24} appearance="minimal" />
-                  </Popover>
-                </Table.Cell>
-              </Table.Row>
+                document={doc}
+                collection={collection}
+              />
             ))}
+            {content.isLoading && !content.docs.length
+              ? new Array(10)
+                  .fill(0)
+                  .map((val, index) => (
+                    <CollectionTableRow
+                      key={index}
+                      collection={collection}
+                      isPlaceholder
+                    />
+                  ))
+              : undefined}
           </Table.Body>
         </Table>
       </Card>
     );
   }
-
-  renderRowMenu(document) {
-    return (
-      <Menu>
-        <Menu.Item
-          intent="danger"
-          onSelect={() => {
-            document.delete();
-          }}
-        >
-          Delete...
-        </Menu.Item>
-      </Menu>
-    );
-  }
-
-  onDelete;
 }
 
 export default observer(CollectionTable);
