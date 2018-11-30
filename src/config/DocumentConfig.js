@@ -6,7 +6,7 @@ class DocumentConfig {
       ...fields,
       id: {
         type: "string",
-        name: "Id",
+        name: "Unique Id",
         description: "Unique Id",
         ...(fields.id || {})
       },

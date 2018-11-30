@@ -1,24 +1,23 @@
 import { observable } from "mobx";
 
-const SortOrder = {
+/* const SortOrder = {
   ASCENDING: "asc",
   DESCENDING: "desc"
-};
+};*/
 
 class CollectionQueryRule {
-  constructor(field) {
-    this._field = field;
-    this._filter = observable.box(undefined);
-    this._sortOrder = observable.box(SortOrder.ASCENDING);
-    this._filterTo = observable.box(undefined);
-  }
-
-  get id() {
-    return this._field.id;
+  constructor(field, { sortOrder, filter, filterTo } = {}) {
+    this._field = observable.box(field);
+    this._sortOrder = observable.box(sortOrder);
+    this._filter = observable.box(filter);
+    this._filterTo = observable.box(filterTo);
   }
 
   get field() {
-    return this._field;
+    return this._field.get();
+  }
+  set field(val) {
+    this._field.set(val);
   }
 
   get filter() {

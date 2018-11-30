@@ -1,8 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Card, Pane, Spinner, Table } from "evergreen-ui";
+import { Pane, Table } from "evergreen-ui";
 import { observer } from "../../app";
+import CollectionTableHeader from "./CollectionTableHeader";
 import CollectionTableRow from "./CollectionTableRow";
+import CollectionTableRowPlaceholder from "./CollectionTableRowPlaceholder";
 
 class CollectionTable extends Component {
   static propTypes = {
@@ -11,19 +13,16 @@ class CollectionTable extends Component {
 
   render() {
     const { collection } = this.props;
-    const { config, content } = collection;
+    const { content } = collection;
     return (
-      <Card flex={1} display="flex" flexDirection="column" elevation={1}>
+      <Pane flex={1} display="flex" flexDirection="column">
         <Table flex={1} display="flex" flexDirection="column">
-          <Table.Head>
-            {config.columns.map(column => (
-              <Table.TextHeaderCell key={column.id}>
-                {column.name}
-              </Table.TextHeaderCell>
-            ))}
-            <Table.HeaderCell width={48} flex="none" />
-          </Table.Head>
+          <CollectionTableHeader collection={collection} />
           <Table.Body flex={1} position="relative">
+            <CollectionTableRowPlaceholder
+              collection={collection}
+              rowCount={content.isLoading && !content.docs.length ? 10 : 0}
+            />
             {content.docs.map(doc => (
               <CollectionTableRow
                 key={doc.id}
@@ -31,20 +30,9 @@ class CollectionTable extends Component {
                 collection={collection}
               />
             ))}
-            {content.isLoading && !content.docs.length
-              ? new Array(10)
-                  .fill(0)
-                  .map((val, index) => (
-                    <CollectionTableRow
-                      key={index}
-                      collection={collection}
-                      isPlaceholder
-                    />
-                  ))
-              : undefined}
           </Table.Body>
         </Table>
-      </Card>
+      </Pane>
     );
   }
 }

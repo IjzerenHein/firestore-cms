@@ -1,4 +1,11 @@
 import { storeObserver, StorePropType, observer } from "./store";
-import { Link, DocumentFieldValue } from "./views/components";
+import { Link, DocumentFieldValue, DebouncedInput } from "./views/components";
 
-export { storeObserver, StorePropType, observer, Link, DocumentFieldValue };
+export {
+  storeObserver,
+  StorePropType,
+  observer,
+  Link,
+  DocumentFieldValue,
+  DebouncedInput
+};

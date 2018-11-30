@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import { Pane, Button, Select } from "evergreen-ui";
+import { Pane, Button, Popover, Position, Menu } from "evergreen-ui";
 import { observer } from "../../app";
+
+const limits = [20, 50, 200];
 
 class CollectionTableFooter extends Component {
   static propTypes = {
@@ -17,25 +19,44 @@ class CollectionTableFooter extends Component {
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
-        marginTop={8}
+        marginTop={12}
       >
-        <Button iconBefore="double-chevron-left" width={100}>
+        <Button
+          iconBefore="double-chevron-left"
+          width={100}
+          appearance="minimal"
+        >
           Previous
         </Button>
-        <Select value={query.limit} onChange={this.onChangeLimit} width={100}>
-          <option value={20}>20</option>
-          <option value={50}>50</option>
-          <option value={100}>100</option>
-        </Select>
-        <Button iconAfter="double-chevron-right" width={100}>
+        <Popover
+          position={Position.BOTTOM_LEFT}
+          content={
+            <Menu>
+              <Menu.Group>
+                {limits.map(val => (
+                  <Menu.Item key={val} onSelect={() => this.onChangeLimit(val)}>
+                    {val}
+                  </Menu.Item>
+                ))}
+              </Menu.Group>
+            </Menu>
+          }
+        >
+          <Button width={100} appearance="minimal" />
+        </Popover>
+        <Button
+          iconAfter="double-chevron-right"
+          width={100}
+          appearance="minimal"
+        >
           Next
         </Button>
       </Pane>
     );
   }
 
-  onChangeLimit = event => {
-    this.props.collection.query.limit = event.target.value;
+  onChangeLimit = val => {
+    this.props.collection.query.limit = val;
   };
 
   onNext = () => {

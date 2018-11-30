@@ -6,19 +6,19 @@ class CollectionQuery {
     this._config = config;
     this._rules = observable.array([]);
     this._limit = observable.box(20);
-    this.addRuleForField("id");
+    this._rulesVisible = observable.box(false);
   }
 
   get config() {
     return this._config;
   }
 
-  addRuleForField(fieldId) {
-    runInAction(() =>
-      this._rules.push(
-        new CollectionQueryRule(this.config.document.fields[fieldId])
-      )
-    );
+  addRule(column, options) {
+    return runInAction(() => {
+      const rule = new CollectionQueryRule(column, options);
+      this._rules.push(rule);
+      return rule;
+    });
   }
 
   deleteRule(rule) {
@@ -27,6 +27,14 @@ class CollectionQuery {
 
   get rules() {
     return this._rules;
+  }
+
+  get rulesVisible() {
+    return this._rulesVisible.get();
+  }
+
+  set rulesVisible(val) {
+    this._rulesVisible.set(val);
   }
 
   get availableFieldsForRules() {}
@@ -41,7 +49,22 @@ class CollectionQuery {
   }
 
   eval(ref) {
-    const { limit } = this;
+    const { rules, limit } = this;
+    rules.forEach(({ field, sortOrder, filter, filterTo }) => {
+      if (!field) return;
+      if (filter !== undefined && filterTo !== undefined) {
+        // range filter and auto sort
+        // TODO
+      } else {
+        // regular sort & filter
+        if (filter !== undefined) {
+          ref = ref.where(field.id, sortOrder === "desc" ? "<=" : ">=", filter);
+        }
+        if (sortOrder !== undefined) {
+          ref = ref.orderBy(field.id, sortOrder);
+        }
+      }
+    });
     if (limit) {
       ref = ref.limit(limit);
     }

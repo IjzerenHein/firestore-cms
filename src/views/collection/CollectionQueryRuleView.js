@@ -1,30 +1,18 @@
 import React, { Component } from "react";
 import { PropTypes } from "prop-types";
-import { observer } from "../../app";
-import {
-  Pane,
-  Select,
-  IconButton,
-  Autocomplete,
-  TextInput,
-  Text
-} from "evergreen-ui";
+import { observer, DebouncedInput } from "../../app";
+import { Pane, Select, IconButton, TextInput, Text } from "evergreen-ui";
 
 class CollectionQueryRuleView extends Component {
   static propTypes = {
+    collection: PropTypes.any.isRequired,
     rule: PropTypes.any.isRequired
   };
 
   render() {
     const { rule } = this.props;
     return (
-      <Pane
-        marginY={12}
-        marginLeft={16}
-        display="flex"
-        flexDirection="row"
-        alignItems="center"
-      >
+      <Pane marginY={8} display="flex" flexDirection="row" alignItems="center">
         <Pane flex="1">
           <Text size={500} color="selected">
             {rule.field.name}
@@ -41,30 +29,18 @@ class CollectionQueryRuleView extends Component {
         </Pane>
 
         <Pane>
-          <Autocomplete
-            title="Filter"
-            onChange={this.onChangeFilter}
-            items={this.getFilterAutoCompleteItems()}
-          >
-            {props => {
-              const { getInputProps, getRef, inputValue, openMenu } = props;
-              return (
-                <TextInput
-                  placeholder="Filter"
-                  value={inputValue}
-                  innerRef={getRef}
-                  {...getInputProps({
-                    onFocus: () => {
-                      openMenu();
-                    }
-                  })}
-                />
-              );
-            }}
-          </Autocomplete>
+          <DebouncedInput value={rule.filter} onChange={this.onChangeFilter}>
+            {({ value, onChange }) => (
+              <TextInput
+                placeholder="Filter"
+                value={value}
+                onChange={onChange}
+              />
+            )}
+          </DebouncedInput>
         </Pane>
 
-        <IconButton appearance="minimal" icon="cross" />
+        <IconButton appearance="minimal" icon="trash" onClick={this.onDelete} />
       </Pane>
     );
   }
@@ -73,15 +49,19 @@ class CollectionQueryRuleView extends Component {
     this.props.rule.sortOrder = event.target.value;
   };
 
-  onChangeFilter = changedItem => {
-    // TODO
-    console.log(changedItem);
+  onChangeFilter = event => {
+    this.props.rule.filter = event.target.value;
   };
 
-  getFilterAutoCompleteItems() {
+  /* getFilterAutoCompleteItems() {
     // TODO
     return ["Apple", "Apricot", "Banana", "Cherry", "Cucumber"];
-  }
+  }*/
+
+  onDelete = () => {
+    const { collection, rule } = this.props;
+    collection.query.deleteRule(rule);
+  };
 }
 
 export default observer(CollectionQueryRuleView);
