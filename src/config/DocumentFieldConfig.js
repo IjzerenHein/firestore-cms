@@ -1,3 +1,5 @@
+import { getFirebase } from "firestorter";
+
 class DocumentFieldConfig {
   constructor(
     id,
@@ -17,6 +19,16 @@ class DocumentFieldConfig {
 
   get id() {
     return this._id;
+  }
+
+  get queryId() {
+    const { id } = this;
+    switch (id) {
+      case "id":
+        return getFirebase().firestore.FieldPath.documentId();
+      default:
+        return id;
+    }
   }
 
   get type() {

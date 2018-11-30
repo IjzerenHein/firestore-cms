@@ -3,23 +3,21 @@ import PropTypes from "prop-types";
 import { Pane, Button, Popover, Position, Menu } from "evergreen-ui";
 import { observer } from "../../app";
 
-const limits = [20, 50, 200];
-
-class CollectionTableFooter extends Component {
+class CollectionFooterView extends Component {
   static propTypes = {
     collection: PropTypes.any
   };
 
   render() {
     const { collection } = this.props;
-    const { query, config } = collection;
+    const { query } = collection;
     return (
       <Pane
         display="flex"
         flexDirection="row"
         alignItems="center"
         justifyContent="center"
-        marginTop={12}
+        marginBottom={12}
       >
         <Button
           iconBefore="double-chevron-left"
@@ -28,21 +26,10 @@ class CollectionTableFooter extends Component {
         >
           Previous
         </Button>
-        <Popover
-          position={Position.BOTTOM_LEFT}
-          content={
-            <Menu>
-              <Menu.Group>
-                {limits.map(val => (
-                  <Menu.Item key={val} onSelect={() => this.onChangeLimit(val)}>
-                    {val}
-                  </Menu.Item>
-                ))}
-              </Menu.Group>
-            </Menu>
-          }
-        >
-          <Button width={100} appearance="minimal" />
+        <Popover position={Position.BOTTOM_LEFT} content={this.renderLimitMenu}>
+          <Button width={50} appearance="minimal">
+            {query.limit}
+          </Button>
         </Popover>
         <Button
           iconAfter="double-chevron-right"
@@ -55,8 +42,24 @@ class CollectionTableFooter extends Component {
     );
   }
 
-  onChangeLimit = val => {
-    this.props.collection.query.limit = val;
+  renderLimitMenu = ({ close }) => {
+    return (
+      <Menu>
+        <Menu.OptionsGroup
+          title="Limit"
+          options={[
+            { label: "20", value: 20 },
+            { label: "50", value: 50 },
+            { label: "200", value: 200 }
+          ]}
+          selected={this.props.collection.query.limit}
+          onChange={value => {
+            this.props.collection.query.limit = value;
+            close();
+          }}
+        />
+      </Menu>
+    );
   };
 
   onNext = () => {
@@ -68,4 +71,4 @@ class CollectionTableFooter extends Component {
   };
 }
 
-export default observer(CollectionTableFooter);
+export default observer(CollectionFooterView);

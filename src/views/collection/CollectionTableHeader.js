@@ -70,7 +70,6 @@ class CollectionTableHeader extends Component {
             const rule = collection.query.rules.length
               ? collection.query.rules[0]
               : collection.query.addRule(column);
-            console.log("RULE: ", rule);
             rule.field = column;
             rule.sortOrder = value;
 

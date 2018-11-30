@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { PropTypes } from "mobx-react";
+import { PropTypes } from "prop-types";
 import { observer } from "../../app";
 import {
   Card,

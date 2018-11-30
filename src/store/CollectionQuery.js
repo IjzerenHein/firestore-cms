@@ -58,10 +58,14 @@ class CollectionQuery {
       } else {
         // regular sort & filter
         if (filter !== undefined) {
-          ref = ref.where(field.id, sortOrder === "desc" ? "<=" : ">=", filter);
+          ref = ref.where(
+            field.queryId,
+            sortOrder === "desc" ? "<=" : ">=",
+            filter
+          );
         }
         if (sortOrder !== undefined) {
-          ref = ref.orderBy(field.id, sortOrder);
+          ref = ref.orderBy(field.queryId, sortOrder);
         }
       }
     });

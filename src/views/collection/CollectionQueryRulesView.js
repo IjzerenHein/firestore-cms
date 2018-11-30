@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { PropTypes } from "mobx-react";
+import { PropTypes } from "prop-types";
 import { observer } from "../../app";
 import { Card, Alert } from "evergreen-ui";
 import CollectionQueryRuleView from "./CollectionQueryRuleView";
@@ -19,7 +19,7 @@ class CollectionQueryRulesView extends Component {
       <Card elevation={1} marginY={8}>
         {query.rules.map(rule => (
           <CollectionQueryRuleView
-            key={rule.id}
+            key={rule.field.id}
             collection={collection}
             rule={rule}
           />
@@ -31,7 +31,7 @@ class CollectionQueryRulesView extends Component {
   renderPlaceholder() {
     return (
       <Alert intent="none" title="No column selected" marginY={8}>
-        Click on a column below to order and filter data on that field
+        Click on a column-header below to sort and filter data on that field
       </Alert>
     );
   }

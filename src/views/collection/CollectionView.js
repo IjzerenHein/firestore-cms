@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import CollectionTable from "./CollectionTable";
 import CollectionHeaderView from "./CollectionHeaderView";
-import CollectionTableFooter from "./CollectionTableFooter";
+import CollectionFooterView from "./CollectionFooterView";
 import { StorePropType, storeObserver } from "../../app";
-import { Card } from "evergreen-ui";
+import { Pane, Card } from "evergreen-ui";
 
 class CollectionView extends Component {
   static propTypes = {
@@ -13,17 +13,20 @@ class CollectionView extends Component {
   render() {
     const { store } = this.props;
     return (
-      <Card
-        margin={16}
-        display="flex"
-        flexDirection="column"
-        flex={1}
-        elevation={1}
-      >
-        <CollectionHeaderView collection={store.selectedCollection} />
-        <CollectionTable collection={store.selectedCollection} />
-        <CollectionTableFooter collection={store.selectedCollection} />
-      </Card>
+      <Pane display="flex" flexDirection="column" flex={1}>
+        <Card
+          margin={16}
+          marginBottom={8}
+          display="flex"
+          flexDirection="column"
+          flex={1}
+          elevation={1}
+        >
+          <CollectionHeaderView collection={store.selectedCollection} />
+          <CollectionTable collection={store.selectedCollection} />
+        </Card>
+        <CollectionFooterView collection={store.selectedCollection} />
+      </Pane>
     );
   }
 }
