@@ -10,6 +10,8 @@
 
 # production
 /build
+/.docz
+/docz-build
 
 # misc
 .DS_Store

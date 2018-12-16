@@ -1,0 +1,105 @@
+---
+name: Configuration
+---
+
+# Configuration
+
+Example configuration.
+
+```js
+const config = {
+  firebase: {
+    apiKey: "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+    authDomain: "xxxxxxxxxx.firebaseapp.com",
+    databaseURL: "https://xxxxxxxx.firebaseio.com",
+    projectId: "xxxxxxxxxx",
+    storageBucket: "xxxxxxxxxx",
+    messagingSenderId: "xxxxxxxxxxxxxx"
+  },
+  title: "My awesome app",
+  isPersistent: true,
+  collections: [
+    {
+      path: "todos",
+      name: "Todos",
+      icon: "tick",
+      document: {
+        fields: {
+          text: {
+            type: "string",
+            name: "Text",
+            description: "Todo text"
+          },
+          isFinished: {
+            type: "check",
+            name: "Finished",
+            description: "Check to mark the todo as finished"
+          }
+        }
+      },
+      columns: ["id", "text", "isFinished"]
+    }
+  ]
+};
+```
+
+## Options
+
+| Options      | Type                                                                      | Description                                                            |
+| ------------ | ------------------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| firebase     | [FirebaseOptions](https://firebase.google.com/docs/reference/js/firebase) | Firebase configuration **(required)**                                  |
+| title        | string                                                                    | Title of your app (e.g. `"My awesome app"`)                            |
+| isPersistent | boolean                                                                   | Save content to browser cache for faster load times (default: `false`) |
+| fieldTypes   | [FieldTypes](#fieldtypes)                                                 | Custom field-types                                                     |
+| collections  | [Collections](#collections)                                               | Firestore collections                                                  |
+
+asdasd
+
+## Field types
+
+A field-type specifies how a field from a Firestore document is displayed and can be edited.
+
+The following field-type are supported out of the box.
+
+| Field-type | Data-type   | Description                                 |
+| ---------- | ----------- | ------------------------------------------- |
+| string     | `string`    | Text string                                 |
+| boolean    | `boolean`   | Boolean displayed using a Checkbox          |
+| switch     | `boolean`   | Boolean displayed using a Switch            |
+| number     | `number`    | Numerical value                             |
+| int        | `number`    | Numerical value with no decimal places      |
+| timestamp  | `timestamp` | Timestamp displayed with both date and time |
+| date       | `timestamp` | Timestamp displayed only with the date part |
+| time       | `timestamp` | Timestamp displayed only with the time part |
+
+You can also add your own field-types or customize the existing ones. To do this, use the `fieldTypes` option in the configuration object, like this.
+
+```js
+const config = {
+  ...
+  fieldTypes: {
+    // add custom data-type for showing msec
+    timeMsec: {
+      dataType: 'timestamp',
+      format: 'hh:mm:ss.SSS',
+      control: 'time',
+    }
+    // override boolean to show as a switch
+    boolean: {
+      control: 'switch'
+    }
+  }
+}
+```
+
+The following properties can be used for configuring field-types.
+
+| Property | Description                                                                                                                                      |
+| -------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| dataType | The underlying data-type, supported are: `string, number, timestamp, boolean`. Other data-types are not yet supported but will be in the future. |
+| control  | Control that is used to display/edit the value. TODO                                                                                             |
+| format   | Format to use when displaying/editing the value (e.g. `#.###`, `YYYY:MM:dd`).                                                                    |
+
+## Collections
+
+asdas
