@@ -18,7 +18,7 @@ export default {
   src: "./docz",
   dest: "./docz-build",
   menu: [
-    "Home",
+    "Getting started",
     "Configuration"
     //{ name: "Configuration", menu: ["Options", "Types", "Collections"] }
   ]
