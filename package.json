@@ -11,7 +11,9 @@
     "firebase-cms",
     "firebase-admin"
   ],
+  "bin": "./src/firestore-cms.sh",
   "repository": "https://github.com/IjzerenHein/firestore-cms",
+  "bugs": "https://github.com/IjzerenHein/firestore-cms/issues",
   "author": "IjzerenHein <hrutjes@gmail.com>",
   "license": "MIT",
   "files": [
@@ -28,13 +30,16 @@
     "moment": "^2.22.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "docz": "^0.12.17",
     "docz-theme-default": "^0.12.17",
+    "parcel-bundler": "^1.11.0",
     "react": "^16.6.3",
     "react-document-meta": "^3.0.0-beta.2",
     "react-dom": "^16.6.3",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "2.1.1"
+    "react-router-dom": "^4.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -42,7 +47,9 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "docz:dev": "docz dev",
-    "docz:build": "docz build"
+    "docz:build": "docz build",
+    "parcel:dev": "parcel ./src/index.html",
+    "parcel:build": "parcel build ./src/index.html"
   },
   "eslintConfig": {
     "extends": "react-app"

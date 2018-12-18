@@ -4,9 +4,10 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import initFirebaseAndStore from "./store/init";
 import FirebaseCMSApp from "./views/AppView";
-import testConfig from "./testConfig";
+import config from "./testConfig";
+// import config from "../../../firestore-cms.js";
 
-initFirebaseAndStore(testConfig).then(store => {
+initFirebaseAndStore(config).then(store => {
   ReactDOM.render(
     <FirebaseCMSApp store={store} />,
     document.getElementById("root")
