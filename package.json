@@ -1,6 +1,6 @@
 {
   "name": "firestore-cms",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "A free, flexible and easy to use CMS for Google Firestore",
   "keywords": [
     "firestore",
@@ -20,35 +20,31 @@
     "src"
   ],
   "dependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-proposal-class-properties": "^7.1.0",
+    "@babel/plugin-transform-runtime": "^7.2.0",
     "evergreen-ui": "^4.7.1",
     "firebase": "^5.5.9",
     "firestorter": "^1.1.0",
     "lodash.merge": "^4.6.1",
     "mobx": "^5.6.0",
     "mobx-react": "^5.4.2",
-    "moment": "^2.22.2"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.0.0-0",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-transform-runtime": "^7.2.0",
-    "docz": "^0.12.17",
-    "docz-theme-default": "^0.12.17",
+    "moment": "^2.22.2",
     "parcel-bundler": "^1.11.0",
     "react": "^16.6.3",
     "react-document-meta": "^3.0.0-beta.2",
     "react-dom": "^16.6.3",
     "react-router-dom": "^4.3.1"
   },
+  "devDependencies": {
+    "docz": "^0.12.17",
+    "docz-theme-default": "^0.12.17"
+  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
+    "start": "parcel ./src/index.html",
+    "build": "parcel build ./src/index.html",
     "docz:dev": "docz dev",
-    "docz:build": "docz build",
-    "parcel:dev": "parcel ./src/index.html",
-    "parcel:build": "parcel build ./src/index.html"
+    "docz:build": "docz build"
   },
   "eslintConfig": {
     "extends": "react-app"
