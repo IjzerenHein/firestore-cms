@@ -17,8 +17,7 @@
   "author": "IjzerenHein <hrutjes@gmail.com>",
   "license": "MIT",
   "files": [
-    "src",
-    "public"
+    "src"
   ],
   "dependencies": {
     "evergreen-ui": "^4.7.1",
