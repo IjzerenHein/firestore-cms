@@ -1,0 +1,51 @@
+---
+name: Getting started
+route: /
+---
+
+# Firebase CMS
+
+A free, flexible and easy to use CMS for Google Firestore 🎉
+
+This project is under development and not ready yet. This project primarily aims at providing an out of the box solution for managing your Firestore collections and documents.
+
+You can use the firebase CMS in two different modes. Either in standalone mode, which can run a dev server and generate a static website. Or in Component mode, in which you can integrate it into your existing React application.
+
+## Standalone mode
+
+To install, add the package as a dev dependency:
+
+`yarn add firebase-cms --dev`
+
+After that, create a configuration file called `firebase-cms.config.js` in the root of your project.
+See [Configuration](/configuration) on how to create a configuration file.
+
+`./firebase-cms.config.js`
+
+To test and debug, you can run a live reloading dev server using:
+
+`yarn firebase-cms dev`
+
+And use the following command to build a production build:
+
+`yarn firebase-cms build`
+
+This will generate a static website in `/firebase-cms-build`.
+
+## Component mode
+
+Component mode offers a much higher degree of flexibility and the ability to integrate Firebase CMS or some of its components into your React application.
+
+Install Firebase CMS a regular dependency:
+
+`yarn add firebase-cms`
+
+You can now import the components into your React application.
+
+```js
+import { AppView, SidebarView, CollectionView } from "firebase-cms";
+
+ReactDOM.render(<AppView store={store} />, document.getElementById("root"));
+```
+
+[The components and their props are documented here](/components).

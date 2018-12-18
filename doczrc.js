@@ -1,6 +1,6 @@
 export default {
-  title: "Firebase CMS",
-  description: "Firebase CMS - documentation",
+  title: "Firestore CMS",
+  description: "Firestore CMS - documentation",
   themeConfig: {
     colors: {
       primary: "tomato"
