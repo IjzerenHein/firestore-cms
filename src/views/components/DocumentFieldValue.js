@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { observer } from "../../app";
 import { Text, TextInput, Checkbox, Switch } from "evergreen-ui";
+import moment from "moment";
 
 class DocumentFieldValue extends Component {
   static propTypes = {
@@ -29,7 +30,7 @@ class DocumentFieldValue extends Component {
             onChange={this.onTextInputChange}
           />
         ) : (
-          <Text>{value}</Text>
+          <Text>{value + ""}</Text>
         );
         break;
       case "checkbox":
@@ -49,6 +50,14 @@ class DocumentFieldValue extends Component {
             onChange={this.onCheckboxSwitchChange}
           />
         );
+        break;
+      case "date":
+        content = (
+          <Text>
+            {moment(value.toDate()).format("YYYY/MM/DD HH:mm:ss.SSS")}
+          </Text>
+        );
+
         break;
       default:
         content = <Text>{value}</Text>;

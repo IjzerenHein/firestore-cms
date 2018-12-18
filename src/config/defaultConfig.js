@@ -46,13 +46,16 @@ const defaultConfig = {
 
     // Date/time
     timestamp: {
-      dataType: "timestamp"
+      dataType: "timestamp",
+      control: "date"
     },
     date: {
-      dataType: "timestamp"
+      dataType: "timestamp",
+      control: "date"
     },
     time: {
-      dataType: "timestamp"
+      dataType: "timestamp",
+      control: "date"
     },
 
     // Numerical types
