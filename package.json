@@ -1,6 +1,6 @@
 {
   "name": "firestore-cms",
-  "version": "0.1.2",
+  "version": "0.2.6",
   "description": "A free, flexible and easy to use CMS for Google Firestore",
   "keywords": [
     "firestore",
@@ -11,18 +11,29 @@
     "firebase-cms",
     "firebase-admin"
   ],
-  "bin": "./src/firestore-cms.sh",
   "repository": "https://github.com/IjzerenHein/firestore-cms",
-  "bugs": "https://github.com/IjzerenHein/firestore-cms/issues",
   "author": "IjzerenHein <hrutjes@gmail.com>",
   "license": "MIT",
   "files": [
-    "src"
+    "src",
+    "public",
+    "build",
+    "init",
+    "cli.js"
   ],
+  "bin": {
+    "firestore-cms": "./cli.js"
+  },
   "dependencies": {
-    "@babel/core": "^7.0.0-0",
-    "@babel/plugin-proposal-class-properties": "^7.1.0",
-    "@babel/plugin-transform-runtime": "^7.2.0",
+    "commander": "^2.19.0",
+    "live-server": "^1.2.1",
+    "microbundle": "^0.9.0",
+    "npc": "^0.0.1",
+    "ora": "^3.0.0"
+  },
+  "devDependencies": {
+    "docz": "^0.12.17",
+    "docz-theme-default": "^0.12.17",
     "evergreen-ui": "^4.7.1",
     "firebase": "^5.5.9",
     "firestorter": "^1.1.0",
@@ -30,19 +41,17 @@
     "mobx": "^5.6.0",
     "mobx-react": "^5.4.2",
     "moment": "^2.22.2",
-    "parcel-bundler": "^1.11.0",
     "react": "^16.6.3",
     "react-document-meta": "^3.0.0-beta.2",
     "react-dom": "^16.6.3",
-    "react-router-dom": "^4.3.1"
-  },
-  "devDependencies": {
-    "docz": "^0.12.17",
-    "docz-theme-default": "^0.12.17"
+    "react-router-dom": "^4.3.1",
+    "react-scripts": "2.1.1"
   },
   "scripts": {
-    "start": "parcel ./src/index.html",
-    "build": "parcel build ./src/index.html",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
     "docz:dev": "docz dev",
     "docz:build": "docz build"
   },

@@ -4,8 +4,8 @@ import "./index.css";
 import * as serviceWorker from "./serviceWorker";
 import initFirebaseAndStore from "./store/init";
 import FirebaseCMSApp from "./views/AppView";
-import config from "./testConfig";
-// import config from "../../../firestore-cms.js";
+//import testConfig from "./testConfig";
+const config = window.firestoreCMSConfig || {};
 
 initFirebaseAndStore(config).then(store => {
   ReactDOM.render(
