@@ -1,6 +1,6 @@
 {
   "name": "firestore-cms",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "A free, flexible and easy to use CMS for Google Firestore",
   "keywords": [
     "firestore",
