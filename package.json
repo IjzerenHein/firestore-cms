@@ -18,7 +18,8 @@
     "src",
     "public",
     "build",
-    "init"
+    "init",
+    "cli.js"
   ],
   "bin": {
     "firestore-cms": "./cli.js"
@@ -27,6 +28,7 @@
     "commander": "^2.19.0",
     "live-server": "^1.2.1",
     "microbundle": "^0.9.0",
+    "npc": "^0.0.1",
     "ora": "^3.0.0"
   },
   "devDependencies": {

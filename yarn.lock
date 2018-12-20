@@ -2538,7 +2538,7 @@ async@1.5.0:
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.0.tgz#2796642723573859565633fc6274444bee2f8ce3"
   integrity sha1-J5ZkJyNXOFlWVjP8YnRES+4vjOM=
 
-async@^1.5.2:
+async@^1.5.0, async@^1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/async/-/async-1.5.2.tgz#ec6a61ae56480c0c3cb241c95618e20892f9672a"
   integrity sha1-7GphrlZIDAw8skHJVhjiCJL5Zyo=
@@ -9993,6 +9993,15 @@ normalize-url@^3.0.0:
   resolved "https://registry.yarnpkg.com/normalize-url/-/normalize-url-3.3.0.tgz#b2e1c4dc4f7c6d57743df733a4f5978d18650559"
   integrity sha512-U+JJi7duF1o+u2pynbp2zXDW2/PADgC30f0GsHZtRh+HOcXHnw137TrNlyxxRvWW5fjKd3bcLHPxofWuCjaeZg==
 
+npc@^0.0.1:
+  version "0.0.1"
+  resolved "https://registry.yarnpkg.com/npc/-/npc-0.0.1.tgz#b2dd2930f78db3ce59f99432e6adc0bff6e57fbd"
+  integrity sha1-st0pMPeNs85Z+ZQy5q3Av/blf70=
+  dependencies:
+    async "^1.5.0"
+    minimist "^1.2.0"
+    recluster "^0.4.5"
+
 npm-bundled@^1.0.1:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/npm-bundled/-/npm-bundled-1.0.5.tgz#3c1732b7ba936b3a10325aef616467c0ccbcc979"
@@ -12424,6 +12433,11 @@ recast@^0.16.0:
     esprima "~4.0.0"
     private "~0.1.5"
     source-map "~0.6.1"
+
+recluster@^0.4.5:
+  version "0.4.5"
+  resolved "https://registry.yarnpkg.com/recluster/-/recluster-0.4.5.tgz#2853bd37d6e016d4065569fc8c6fa2209a11e3f0"
+  integrity sha1-KFO9N9bgFtQGVWn8jG+iIJoR4/A=
 
 recursive-readdir@2.2.2:
   version "2.2.2"
